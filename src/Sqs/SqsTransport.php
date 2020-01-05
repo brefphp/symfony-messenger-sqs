@@ -46,7 +46,7 @@ class SqsTransport implements TransportInterface
             'QueueUrl' => $this->queueUrl,
         ];
 
-        if (null !== $this->messageGroupId) {
+        if ($this->messageGroupId !== null) {
             $arguments['MessageGroupId'] = $this->messageGroupId;
         }
 
