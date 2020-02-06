@@ -50,11 +50,21 @@ MESSENGER_TRANSPORT_DSN=https://sqs.us-east-1.amazonaws.com/123456789101/my-queu
 Now that Messenger is configured with SQS, we can send messages using the `MessageBusInterface`. For example, in a controller:
 
 ```php
+
+use Symfony\Component\Messenger\MessageBusInterface;
+
 class DefaultController extends AbstractController
 {
+    private $messageBus;
+
+    public function __construct(MessageBusInterface $messageBus)
+    {
+        $this->messageBus = $messageBus;
+    }
+
     public function index()
     {
-        $this->dispatchMessage(new App\Message\MyMessage());
+        $this->messageBus->dispatch(new App\Message\MyMessage());
     }
 }
 ```
