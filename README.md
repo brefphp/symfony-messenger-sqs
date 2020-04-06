@@ -1,3 +1,7 @@
+**This package is deprecated in favor of the more generic [bref/symfony-messenger](https://github.com/brefphp/symfony-messenger).**
+
+---
+
 Bridge to use Symfony Messenger with SQS on AWS Lambda with [Bref](https://bref.sh).
 
 ## Installation
