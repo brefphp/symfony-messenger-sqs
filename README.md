@@ -12,6 +12,7 @@ This guide assumes that:
 - Symfony Messenger is installed
 - Bref is installed and [configured to deploy Symfony](https://bref.sh/docs/frameworks/symfony.html)
 - a SQS queue has already been created
+- (If FIFO queue, then enable "Content-Based Deduplication")
 
 First, install this package:
 
@@ -36,7 +37,10 @@ Next, configure Symfony Messenger to dispatch a message via SQS:
 framework:
     messenger:
         transports:
-            async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            async: 
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                # If FIFO queue, you must add message_group_id. 
+                options: { message_group_id: com_example }
         routing:
              'App\Message\MyMessage': async
 ```
